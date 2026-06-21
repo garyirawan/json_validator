@@ -538,7 +538,7 @@ export default function App() {
             </div>
             <div>
               <h1 className="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
-                Arqé JSON Validator & Live Lottie Animator Studio
+                JSON Validator & Live Lottie Animator Studio
               </h1>
               <p className="text-xs text-slate-400">
                 {"Alur Kerja Tiga Proses Vertikal (Refactor -> Integrity Match -> Live Lottie Player)"}
@@ -1071,7 +1071,7 @@ export default function App() {
 
       {/* FOOTER */}
       <footer className="border-t border-slate-900 bg-slate-950 py-6 text-center text-xs text-slate-500">
-        <p>© 2026 Arqé Clone Project — Automated JSON Verification Toolkit</p>
+        <p>© 2026 Clone Project — Automated JSON Verification Toolkit</p>
       </footer>
 
     </div>
