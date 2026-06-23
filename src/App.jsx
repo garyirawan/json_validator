@@ -11,112 +11,8 @@ async function generateSHA256(text) {
 
 // Template bawaan Carousel Arqé untuk inisialisasi awal (Lottie JSON Sederhana)
 const defaultLottieJSON = {
-  v: "5.12.1",
-  fr: 60,
-  ip: 0,
-  op: 120,
-  w: 500,
-  h: 500,
-  nm: "Default Loader",
-  ddd: 0,
-  assets: [],
-  layers: [
-    {
-      ddd: 0,
-      ind: 1,
-      ty: 1,
-      nm: "Background",
-      sr: 1,
-      ks: {
-        o: { a: 0, k: 100, ix: 11 },
-        r: { a: 0, k: 0, ix: 10 },
-        p: { a: 0, k: [250, 250, 0], ix: 2 },
-        a: { a: 0, k: [250, 250, 0], ix: 1 },
-        s: { a: 0, k: [100, 100, 100], ix: 6 }
-      },
-      ao: 0,
-      sw: 500,
-      sh: 500,
-      sc: "#0f172a",
-      ip: 0,
-      op: 120,
-      st: 0,
-      bm: 0
-    },
-    {
-      ddd: 0,
-      ind: 2,
-      ty: 4,
-      nm: "Vektor Bulat Orbit",
-      sr: 1,
-      ks: {
-        o: { a: 0, k: 100, ix: 11 },
-        r: {
-          a: 1,
-          k: [
-            { t: 0, s: [0], h: 1 },
-            { t: 120, s: [360], h: 1 }
-          ],
-          ix: 10
-        },
-        p: { a: 0, k: [250, 250, 0], ix: 2 },
-        a: { a: 0, k: [0, 0, 0], ix: 1 },
-        s: { a: 0, k: [100, 100, 100], ix: 6 }
-      },
-      ao: 0,
-      shapes: [
-        {
-          ty: "gr",
-          it: [
-            {
-              d: 1,
-              ty: "el",
-              s: { a: 0, k: [120, 120], ix: 2 },
-              p: { a: 0, k: [0, 0], ix: 3 },
-              nm: "Ellipse Path",
-              mn: "ADBE Vector Shape - Ellipse",
-              hd: false
-            },
-            {
-              ty: "st",
-              c: { a: 0, k: [0.38, 0.4, 1, 1], ix: 3 },
-              o: { a: 0, k: 100, ix: 4 },
-              w: { a: 0, k: 6, ix: 5 },
-              lc: 1,
-              lj: 1,
-              ml: 4,
-              bm: 0,
-              nm: "Stroke 1",
-              mn: "ADBE Vector Graphic - Stroke",
-              hd: false
-            },
-            {
-              ty: "tr",
-              p: { a: 0, k: [0, 0], ix: 2 },
-              a: { a: 0, k: [0, 0], ix: 1 },
-              s: { a: 0, k: [100, 100], ix: 3 },
-              r: { a: 0, k: 0, ix: 6 },
-              o: { a: 0, k: 100, ix: 7 },
-              sk: { a: 0, k: 0, ix: 8 },
-              sa: { a: 0, k: 0, ix: 9 },
-              nm: "Transform"
-            }
-          ],
-          nm: "Group 1",
-          np: 2,
-          cix: 2,
-          bm: 0,
-          ix: 1,
-          mn: "ADBE Vector Group",
-          hd: false
-        }
-      ],
-      ip: 0,
-      op: 120,
-      st: 0,
-      bm: 0
-    }
-  ]
+  "comment": "contoh json: ", 
+  "v":"5.12.1","fr":60,"ip":361,"op":892,"w":1400,"h":1867,"nm":"Pre-comp 1","ddd":0,"assets":[{"id":"image_0","w":3500,"h":2489,"u":"images/","p":"img_0.png","e":0},{"id":"image_1","w":3500,"h":2489,"u":"images/","p":"img_1.png","e":0},{"id":"image_2","w":3500,"h":2489,"u":"images/","p":"img_2.png","e":0},{"id":"image_3","w":3500,"h":2489,"u":"images/","p":"img_3.png","e":0},{"id":"image_4","w":3500,"h":2489,"u":"images/","p":"img_4.png","e":0},{"id":"image_5","w":3500,"h":2489,"u":"images/","p":"img_5.png","e":0},{"id":"image_6","w":3500,"h":2489,"u":"images/","p":"img_6.png","e":0}],"layers":[{"ddd":0,"ind":1,"ty":3,"nm":"NULL Frame 15","sr":1,"ks":{"o":{"a":0,"k":0,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":1,"k":[{"i":{"x":0.18,"y":1},"o":{"x":0.9,"y":0},"t":780,"s":[2780,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.28,"y":1},"o":{"x":0.9,"y":0},"t":900,"s":[1736,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.4,"y":1},"o":{"x":0.9,"y":0},"t":1022,"s":[692,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.28,"y":1},"o":{"x":0.62,"y":0},"t":1143,"s":[-352,934,0],"to":[0,0,0],"ti":[0,0,0]},{"t":1263,"s":[-629,934,0]}],"ix":2,"l":2},"a":{"a":0,"k":[50,50,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"ip":780,"op":4380,"st":780,"bm":0},{"ddd":0,"ind":2,"ty":3,"nm":"NULL Frame 14","sr":1,"ks":{"o":{"a":0,"k":0,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":1,"k":[{"i":{"x":0.18,"y":1},"o":{"x":0.9,"y":0},"t":650,"s":[2780,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.28,"y":1},"o":{"x":0.9,"y":0},"t":770,"s":[1736,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.4,"y":1},"o":{"x":0.9,"y":0},"t":892,"s":[692,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.28,"y":1},"o":{"x":0.62,"y":0},"t":1013,"s":[-352,934,0],"to":[0,0,0],"ti":[0,0,0]},{"t":1133,"s":[-629,934,0]}],"ix":2,"l":2},"a":{"a":0,"k":[50,50,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"ip":650,"op":4250,"st":650,"bm":0},{"ddd":0,"ind":3,"ty":3,"nm":"NULL Frame 13","sr":1,"ks":{"o":{"a":0,"k":0,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":1,"k":[{"i":{"x":0.18,"y":1},"o":{"x":0.9,"y":0},"t":520,"s":[2780,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.28,"y":1},"o":{"x":0.9,"y":0},"t":640,"s":[1736,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.4,"y":1},"o":{"x":0.9,"y":0},"t":762,"s":[692,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.28,"y":1},"o":{"x":0.62,"y":0},"t":883,"s":[-352,934,0],"to":[0,0,0],"ti":[0,0,0]},{"t":1003,"s":[-629,934,0]}],"ix":2,"l":2},"a":{"a":0,"k":[50,50,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"ip":520,"op":4120,"st":520,"bm":0},{"ddd":0,"ind":4,"ty":3,"nm":"NULL Frame 12","sr":1,"ks":{"o":{"a":0,"k":0,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":1,"k":[{"i":{"x":0.18,"y":1},"o":{"x":0.9,"y":0},"t":390,"s":[2780,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.28,"y":1},"o":{"x":0.9,"y":0},"t":510,"s":[1736,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.4,"y":1},"o":{"x":0.9,"y":0},"t":632,"s":[692,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.28,"y":1},"o":{"x":0.62,"y":0},"t":753,"s":[-352,934,0],"to":[0,0,0],"ti":[0,0,0]},{"t":873,"s":[-629,934,0]}],"ix":2,"l":2},"a":{"a":0,"k":[50,50,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"ip":390,"op":3990,"st":390,"bm":0},{"ddd":0,"ind":5,"ty":3,"nm":"NULL Frame 11","sr":1,"ks":{"o":{"a":0,"k":0,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":1,"k":[{"i":{"x":0.18,"y":1},"o":{"x":0.9,"y":0},"t":260,"s":[2780,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.28,"y":1},"o":{"x":0.9,"y":0},"t":380,"s":[1736,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.4,"y":1},"o":{"x":0.9,"y":0},"t":502,"s":[692,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.28,"y":1},"o":{"x":0.62,"y":0},"t":623,"s":[-352,934,0],"to":[0,0,0],"ti":[0,0,0]},{"t":743,"s":[-629,934,0]}],"ix":2,"l":2},"a":{"a":0,"k":[50,50,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"ip":260,"op":3860,"st":260,"bm":0},{"ddd":0,"ind":6,"ty":3,"nm":"NULL Frame 10","sr":1,"ks":{"o":{"a":0,"k":0,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":1,"k":[{"i":{"x":0.18,"y":1},"o":{"x":0.9,"y":0},"t":130,"s":[2780,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.28,"y":1},"o":{"x":0.9,"y":0},"t":250,"s":[1736,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.4,"y":1},"o":{"x":0.9,"y":0},"t":372,"s":[692,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.28,"y":1},"o":{"x":0.62,"y":0},"t":493,"s":[-352,934,0],"to":[0,0,0],"ti":[0,0,0]},{"t":613,"s":[-629,934,0]}],"ix":2,"l":2},"a":{"a":0,"k":[50,50,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"ip":130,"op":3730,"st":130,"bm":0},{"ddd":0,"ind":7,"ty":3,"nm":"NULL Frame 1","sr":1,"ks":{"o":{"a":0,"k":0,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":1,"k":[{"i":{"x":0.08,"y":1},"o":{"x":0.9,"y":0},"t":0,"s":[2780,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.28,"y":1},"o":{"x":0.9,"y":0},"t":120,"s":[1736,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.4,"y":1},"o":{"x":0.9,"y":0},"t":242,"s":[692,934,0],"to":[0,0,0],"ti":[0,0,0]},{"i":{"x":0.28,"y":1},"o":{"x":0.62,"y":0},"t":363,"s":[-352,934,0],"to":[0,0,0],"ti":[0,0,0]},{"t":483,"s":[-629,934,0]}],"ix":2,"l":2},"a":{"a":0,"k":[50,50,0],"ix":1,"l":2},"s":{"a":0,"k":[100,100,100],"ix":6,"l":2}},"ao":0,"ip":0,"op":3600,"st":0,"bm":0},{"ddd":0,"ind":8,"ty":2,"nm":"image_7","parent":1,"refId":"image_0","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[50,50,0],"ix":2,"l":2},"a":{"a":0,"k":[1750,1244.5,0],"ix":1,"l":2},"s":{"a":0,"k":[27.141,27.141,100],"ix":6,"l":2}},"ao":0,"ip":0,"op":3600,"st":0,"bm":0},{"ddd":0,"ind":9,"ty":2,"nm":"image_6","parent":2,"refId":"image_1","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[50,50,0],"ix":2,"l":2},"a":{"a":0,"k":[1750,1244.5,0],"ix":1,"l":2},"s":{"a":0,"k":[27.141,27.141,100],"ix":6,"l":2}},"ao":0,"ip":0,"op":3600,"st":0,"bm":0},{"ddd":0,"ind":10,"ty":2,"nm":"image_5","parent":3,"refId":"image_2","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[50,50,0],"ix":2,"l":2},"a":{"a":0,"k":[1750,1244.5,0],"ix":1,"l":2},"s":{"a":0,"k":[27.141,27.141,100],"ix":6,"l":2}},"ao":0,"ip":0,"op":3600,"st":0,"bm":0},{"ddd":0,"ind":11,"ty":2,"nm":"image_4","parent":4,"refId":"image_3","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[50,50,0],"ix":2,"l":2},"a":{"a":0,"k":[1750,1244.5,0],"ix":1,"l":2},"s":{"a":0,"k":[27.141,27.141,100],"ix":6,"l":2}},"ao":0,"ip":0,"op":3600,"st":0,"bm":0},{"ddd":0,"ind":12,"ty":2,"nm":"image_3","parent":5,"refId":"image_4","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[50,50,0],"ix":2,"l":2},"a":{"a":0,"k":[1750,1244.5,0],"ix":1,"l":2},"s":{"a":0,"k":[27.141,27.141,100],"ix":6,"l":2}},"ao":0,"ip":0,"op":3600,"st":0,"bm":0},{"ddd":0,"ind":13,"ty":2,"nm":"image_2","parent":6,"refId":"image_5","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[50,50,0],"ix":2,"l":2},"a":{"a":0,"k":[1750,1244.5,0],"ix":1,"l":2},"s":{"a":0,"k":[27.141,27.141,100],"ix":6,"l":2}},"ao":0,"ip":0,"op":3600,"st":0,"bm":0},{"ddd":0,"ind":14,"ty":2,"nm":"image_1","parent":7,"refId":"image_6","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[50,50,0],"ix":2,"l":2},"a":{"a":0,"k":[1750,1244.5,0],"ix":1,"l":2},"s":{"a":0,"k":[27.141,27.141,100],"ix":6,"l":2}},"ao":0,"ip":0,"op":3600,"st":0,"bm":0},{"ddd":0,"ind":15,"ty":1,"nm":"Dark Gray Solid 1","sr":1,"ks":{"o":{"a":0,"k":100,"ix":11},"r":{"a":0,"k":0,"ix":10},"p":{"a":0,"k":[700,933.5,0],"ix":2,"l":2},"a":{"a":0,"k":[960,540,0],"ix":1,"l":2},"s":{"a":0,"k":[188,188,100],"ix":6,"l":2}},"ao":0,"sw":1920,"sh":1080,"sc":"#0a0a0a","ip":0,"op":3600,"st":0,"bm":0}],"markers":[{"tm":781,"cm":"2","dr":0},{"tm":902,"cm":"1","dr":0}],"props":{}
 };
 
 // Penjelasan metadata Lottie untuk hover tooltip
@@ -149,7 +45,52 @@ const lottieMetadataTooltips = {
 };
 
 export default function App() {
-  // --- STATE BAGIAN 1 (ATAS): INPUT & EDITING ---
+  // --- STATE SYSTEM TOAST NOTIFIKASI SINKRON & AUTO-DISMISS ---
+  const [toast, setToast] = useState({
+    show: false,
+    visible: false, // Digunakan untuk memicu animasi masuk & keluar (fade/slide)
+    type: 'info', // 'success' | 'error' | 'warning' | 'info'
+    title: '',
+    message: '',
+    recommendation: ''
+  });
+
+  const toastTimerRef = useRef(null);
+  const toastExitTimerRef = useRef(null);
+
+  // Fungsi pemicu Toast dengan animasi mulus dan auto-dismiss 5 detik
+  const triggerNotification = (title, message, recommendation = '', type = 'info') => {
+    // Bersihkan sisa timer sebelumnya jika ada pemicuan beruntun
+    if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+    if (toastExitTimerRef.current) clearTimeout(toastExitTimerRef.current);
+
+    // Render komponen Latar
+    setToast({
+      show: true,
+      visible: false,
+      type,
+      title,
+      message,
+      recommendation
+    });
+
+    // Jalankan efek transisi Masuk (Slide-In) di frame berikutnya
+    setTimeout(() => {
+      setToast(prev => ({ ...prev, visible: true }));
+    }, 50);
+
+    // Memicu animasi Keluar (Slide-Out) pada detik 4.5 (menyisakan 500ms untuk transisi keluar)
+    toastExitTimerRef.current = setTimeout(() => {
+      setToast(prev => ({ ...prev, visible: false }));
+    }, 9500);
+
+    // Menghapus komponen secara penuh dari DOM pada detik ke-5
+    toastTimerRef.current = setTimeout(() => {
+      setToast(prev => ({ ...prev, show: false }));
+    }, 10000);
+  };
+
+  // --- STATE BAGIAN 1 (ATAS): INPUT & EDITING REAL-TIME ---
   const [rawInput, setRawInput] = useState(JSON.stringify(defaultLottieJSON));
   const [refactoredOutput, setRefactoredOutput] = useState('');
   const [indentSize, setIndentSize] = useState(2);
@@ -160,6 +101,7 @@ export default function App() {
   // State untuk penyeretan berkas utama
   const [isDragging, setIsDragging] = useState(false);
   const [isRefactoring, setIsRefactoring] = useState(false);
+  const [isFileLoading, setIsFileLoading] = useState(false); // State loading untuk Upload & GDrive
   const [copySuccess, setCopySuccess] = useState(false);
 
   // Validasi sintaksis JSON Real-time
@@ -172,7 +114,7 @@ export default function App() {
   const [originalHash, setOriginalHash] = useState('');
   const [refactoredHash, setRefactoredHash] = useState('');
 
-  // --- STATE BAGIAN 3 (BAWAH): MULTI PREVIEWS (SAMPINGAN & HEAD-TO-HEAD) ---
+  // --- STATE BAGIAN 3 (BAWAH): MULTI PREVIEWS ---
   const [isPlaying, setIsPlaying] = useState(true);
   const [aspectRatio, setAspectRatio] = useState('16:9');
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
@@ -281,7 +223,7 @@ export default function App() {
     if (videoPlayerRef.current) videoPlayerRef.current.playbackRate = playbackSpeed;
   }, [playbackSpeed]);
 
-  // Fungsi Proses 1: Refactoring / Formatting
+  // Fungsi Proses 1: Refactoring / Formatting dengan loading tunda visual
   const doRefactor = (sourceText, indent) => {
     setIsRefactoring(true);
     setTimeout(() => {
@@ -299,7 +241,7 @@ export default function App() {
       } finally {
         setIsRefactoring(false);
       }
-    }, 400);
+    }, 750); // Delay tunda visual sengaja dibuat agar efek rendering Lottie terasa mantap
   };
 
   const handleStartRefactor = () => {
@@ -347,16 +289,32 @@ export default function App() {
 
   const processUploadedFile = (file) => {
     if (!file.name.endsWith('.json')) {
-      alert("Hanya berkas berekstensi .json yang didukung!");
+      triggerNotification(
+        "Format Berkas Salah",
+        "Ekstensi file bukan merupakan .json",
+        "Unggah ulang berkas format Lottie .json After Effects yang valid.",
+        "error"
+      );
       return;
     }
+    setIsFileLoading(true);
     setFileName(file.name);
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      setRawInput(event.target.result);
-      doRefactor(event.target.result, indentSize);
-    };
-    reader.readAsText(file);
+    
+    setTimeout(() => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setRawInput(event.target.result);
+        doRefactor(event.target.result, indentSize);
+        setIsFileLoading(false);
+        triggerNotification(
+          "Berkas Dimuat",
+          `Berkas Lottie "${file.name}" sukses diunggah ke workspace.`,
+          "Cek visual rendering real-time pada panel kanan.",
+          "success"
+        );
+      };
+      reader.readAsText(file);
+    }, 800); // Penundaan visual rendering yang nyaman
   };
 
   // Drag and drop khusus Video Referensi (.mp4) ke panel Head-to-Head
@@ -378,8 +336,19 @@ export default function App() {
       setVideoFile(file);
       const url = URL.createObjectURL(file);
       setVideoUrl(url);
+      triggerNotification(
+        "Video Referensi Terpasang",
+        `Berkas video "${file.name}" siap dibandingkan berdampingan.`,
+        "Tekan play/pause di bawah untuk menguji sinkronisasi putaran.",
+        "success"
+      );
     } else {
-      alert("Harap unggah berkas video (.mp4) yang valid!");
+      triggerNotification(
+        "Format Video Salah",
+        "Sistem menolak tipe berkas yang dimasukkan.",
+        "Pastikan menyeret berkas video standar dengan format ekstensi .mp4.",
+        "error"
+      );
     }
   };
 
@@ -390,13 +359,19 @@ export default function App() {
       setVideoFile(file);
       const url = URL.createObjectURL(file);
       setVideoUrl(url);
+      triggerNotification(
+        "Video Dimuat",
+        `Berkas "${file.name}" sukses dipasang ke area pembanding.`,
+        "Gunakan drag & drop langsung ke layar untuk mempermudah penggantian berkas.",
+        "success"
+      );
     }
   };
 
   // Fetch dari Google Drive menggunakan proxy fallback
   const handleDriveFetch = async () => {
     if (!driveUrl) return;
-    setIsRefactoring(true);
+    setIsFileLoading(true);
     setComparisonResult(null);
 
     let fileId = '';
@@ -406,8 +381,13 @@ export default function App() {
     } catch (e) {}
 
     if (!fileId) {
-      alert("ID File Google Drive tidak terdeteksi!");
-      setIsRefactoring(false);
+      triggerNotification(
+        "Tautan Rusak",
+        "Parser gagal membaca pola link Google Drive.",
+        "Pastikan URL mengandung ID unik seperti '/file/d/[FILE_ID]/view'.",
+        "error"
+      );
+      setIsFileLoading(false);
       return;
     }
 
@@ -415,21 +395,34 @@ export default function App() {
     const directUrl = `https://docs.google.com/uc?export=download&id=${fileId}`;
     const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(directUrl)}`;
 
-    try {
-      const res = await fetch(proxyUrl);
-      if (res.ok) {
-        const text = await res.text();
-        JSON.parse(text); // Tes validitas JSON sebelum disimpan
-        setRawInput(text);
-        doRefactor(text, indentSize);
-      } else {
-        throw new Error();
+    setTimeout(async () => {
+      try {
+        const res = await fetch(proxyUrl);
+        if (res.ok) {
+          const text = await res.text();
+          JSON.parse(text); // Tes validitas JSON sebelum disimpan
+          setRawInput(text);
+          doRefactor(text, indentSize);
+          triggerNotification(
+            "Koneksi Sukses",
+            "File Lottie JSON sukses diunduh murni dari Google Drive.",
+            "Cek integritas berkas di Proses 2 untuk validitas final.",
+            "success"
+          );
+        } else {
+          throw new Error();
+        }
+      } catch (err) {
+        triggerNotification(
+          "Akses Gagal",
+          "Server proxy gagal mengunduh otomatis file terkait.",
+          "Unduh manual file json nya, lalu gunakan tab 'Unggah Berkas'.",
+          "warning"
+        );
+      } finally {
+        setIsFileLoading(false);
       }
-    } catch (err) {
-      alert("Gagal memuat otomatis dari Drive. Silakan gunakan metode 'Unggah Berkas'!");
-    } finally {
-      setIsRefactoring(false);
-    }
+    }, 1000); // Memberikan efek loading sinkronisasi drive yang rapi
   };
 
   // Menyalin ke clipboard
@@ -442,6 +435,12 @@ export default function App() {
     document.body.removeChild(textarea);
     setCopySuccess(true);
     setTimeout(() => setCopySuccess(false), 2000);
+    triggerNotification(
+      "Salin Clipboard",
+      "Seluruh baris kode JSON telah sukses tersalin.",
+      "Gunakan kombinasi tombol Ctrl + V untuk langsung paste di teks editor anda.",
+      "success"
+    );
   };
 
   // Unduh berkas format otomatis
@@ -459,6 +458,13 @@ export default function App() {
     anchor.click();
     document.body.removeChild(anchor);
     URL.revokeObjectURL(url);
+    
+    triggerNotification(
+      "Ekspor Sukses",
+      `Berkas "${finalDownloadName}" siap disimpan.`,
+      "Simpan file ini langsung ke dalam repositori website produksi utama.",
+      "success"
+    );
   };
 
   // Fungsi Proses 2: Uji Integritas Mutlak SHA-256
@@ -484,18 +490,22 @@ export default function App() {
         const isHashMatch = hashOrig === hashRefac;
 
         if (isHashMatch && isStructuralMatch) {
-          setComparisonResult({
+          const report = {
             status: 'PASS',
             message: 'INTEGRITAS AMAN (100% Cocok Sempurna!)',
             detail: 'Tidak ada satu pun karakter murni atau parameter dari After Effects yang terlewat atau berubah.'
-          });
+          };
+          setComparisonResult(report);
+          triggerNotification("Integritas Lolos", "Sidik jari SHA-256 terverifikasi aman.", "Berkas siap untuk diserahkan ke Tim Dev.", "success");
         } else {
           const diffCount = Math.abs(cleanOriginal.length - cleanRefactored.length);
-          setComparisonResult({
+          const report = {
             status: 'FAIL',
             message: 'INTEGRITAS TERGANGGU! (Data Berbeda)',
             detail: `Terdeteksi perbedaan struktural. Terdapat selisih murni sekitar ${diffCount} karakter antara berkas asli dan hasil refactoring.`
-          });
+          };
+          setComparisonResult(report);
+          triggerNotification("Data Tidak Sinkron", "Ditemukan ketidakcocokan karakter.", "Periksa kembali whitespace atau karakter khusus yang tidak sengaja terhapus.", "error");
         }
       } catch (err) {
         setComparisonResult({
@@ -503,10 +513,11 @@ export default function App() {
           message: 'Verifikasi Gagal!',
           detail: `Sintaksis JSON rusak atau memiliki kesalahan format.`
         });
+        triggerNotification("Audit Gagal", "Sintaksis JSON di editor tidak valid.", "Harap perbaiki tanda baca atau kurung kurawal di editor.", "error");
       } finally {
         setIsComparing(false);
       }
-    }, 600);
+    }, 1000); // Memperpanjang sedikit loading audit agar pengerjaan enkripsi SHA-256 terasa profesional
   };
 
   // Sengaja merusak kode hasil refactoring (Uji Validasi Alat)
@@ -516,6 +527,12 @@ export default function App() {
                                         .replace(/"fr": \d+/, '"fr": 99');
       setRefactoredOutput(corrupted);
       setComparisonResult(null);
+      triggerNotification(
+        "Kerusakan Simulasi Disuntik",
+        "Nilai versi ('v') dan frame rate ('fr') pada editor di atas telah sengaja dimodifikasi.",
+        "Gunakan Proses 2 untuk menguji kepekaan dan fungsionalitas sistem audit.",
+        "warning"
+      );
     }
   };
 
@@ -578,7 +595,7 @@ export default function App() {
               {tooltip.letter}
             </span>
             {/* Tooltip Card */}
-            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 w-60 p-3 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl text-[10.5pt] text-slate-300 font-sans leading-normal opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-200 z-50">
+            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 w-60 p-3 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl text-[10.5pt] text-slate-300 font-sans leading-normal opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-200 z-50 font-normal">
               <div className="font-bold text-indigo-400 mb-1 border-b border-slate-800 pb-1 flex items-center gap-1.5">
                 <span className="bg-indigo-600/20 px-1 py-0.5 rounded text-[9px] text-indigo-300">{tooltip.letter}</span>
                 {tooltip.title}
@@ -597,6 +614,63 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-indigo-500/30">
       
+      {/* ==========================================
+          MODAL POP-UP TOAST NOTIFIKASI SINKRON & ANIMATIF (PREMIUM & SIMPEL)
+          ========================================== */}
+      {toast.show && (
+        <div className="fixed top-6 right-6 z-50 max-w-sm w-full">
+          {/* Efek transisi masuk-keluar dikontrol oleh state toast.visible */}
+          <div className={`bg-slate-900/90 backdrop-blur-xl border border-slate-850 rounded-xl p-4 shadow-2xl flex items-start gap-3 relative overflow-hidden transition-all duration-500 ease-in-out transform ${
+            toast.visible 
+              ? 'opacity-100 translate-x-0 scale-100' 
+              : 'opacity-0 translate-x-12 scale-95 pointer-events-none'
+          }`}>
+            {/* Garis aksen vertikal di sebelah kiri */}
+            <div className={`absolute top-0 bottom-0 left-0 w-1 ${
+              toast.type === 'error' ? 'bg-rose-500' :
+              toast.type === 'success' ? 'bg-emerald-500' :
+              toast.type === 'warning' ? 'bg-amber-500' : 'bg-indigo-500'
+            }`} />
+
+            {/* Ikon Notifikasi */}
+            <div className={`text-base p-1.5 rounded-lg shrink-0 ${
+              toast.type === 'error' ? 'bg-rose-500/10 text-rose-400' :
+              toast.type === 'success' ? 'bg-emerald-500/10 text-emerald-400' :
+              toast.type === 'warning' ? 'bg-amber-500/10 text-amber-400' : 'bg-indigo-500/10 text-indigo-400'
+            }`}>
+              {toast.type === 'error' ? '🚨' : toast.type === 'success' ? '✅' : '⚠️'}
+            </div>
+            
+            {/* Teks Informasi Notifikasi & Rekomendasi */}
+            <div className="flex-1 space-y-0.5 pr-2">
+              <h4 className="text-xs font-bold text-slate-100 leading-tight">{toast.title}</h4>
+              <p className="text-[11px] text-slate-400 leading-normal font-normal">{toast.message}</p>
+              
+              {toast.recommendation && (
+                <div className="text-[10px] text-indigo-300 font-mono mt-1.5 pt-1.5 border-t border-slate-850/60 leading-relaxed font-normal">
+                  💡 <strong></strong> {toast.recommendation}
+                </div>
+              )}
+            </div>
+
+            {/* Tombol Tutup (X) */}
+            <button 
+              onClick={() => setToast(prev => ({ ...prev, visible: false }))}
+              className="text-slate-500 hover:text-slate-300 transition-colors text-xs shrink-0 self-start p-1"
+            >
+              ✕
+            </button>
+
+            {/* COUNTDOWN PROGRESS BAR ANIMATIF (Penyusutan selama 4.5 Detik secara linier) */}
+            <div 
+              className={`absolute bottom-0 left-0 h-[2.5px] bg-gradient-to-r from-indigo-500 via-purple-500 to-rose-500 transition-all ease-linear ${
+                toast.visible ? 'w-0 duration-[9500ms]' : 'w-full duration-0'
+              }`}
+            />
+          </div>
+        </div>
+      )}
+
       {/* NAVBAR */}
       <nav className="border-b border-slate-900 bg-slate-950/80 backdrop-blur sticky top-0 z-40 px-6 py-4">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
@@ -624,7 +698,7 @@ export default function App() {
       <main className="max-w-7xl w-full mx-auto px-4 md:px-6 py-8 space-y-10">
         
         {/* ==========================================
-            BAGIAN 1 (ATAS): SINKRONISASI SAMPINGAN (EDITOR vs INSTANT PREVIEW)
+            BAGIAN 1 (ATAS): SINKRONISASI EDITOR & PREVIEW INSTAN
             ========================================== */}
         <section className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
           <div className="bg-slate-850/40 px-6 py-4 border-b border-slate-850 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -657,7 +731,27 @@ export default function App() {
           <div className="p-6 flex flex-col xl:flex-row gap-6">
             
             {/* Editor Sisi Kiri (Bisa Diedit Manual) */}
-            <div className="w-full xl:w-7/12 flex flex-col gap-4">
+            <div className="w-full xl:w-7/12 flex flex-col gap-4 relative">
+              
+              {/* LAYOVER LOADING PROTEKSI PROSES 1 (PILIH FILE / FETCH DRIVE / REFACTOR) */}
+              {(isRefactoring || isFileLoading) && (
+                <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm z-30 flex flex-col items-center justify-center rounded-2xl border border-indigo-500/20 shadow-2xl animate-fade-in">
+                  <div className="relative flex items-center justify-center h-16 w-16 mb-4">
+                    <div className="animate-ping absolute inline-flex h-12 w-12 rounded-full bg-indigo-500/30 opacity-75"></div>
+                    <div className="relative rounded-full h-10 w-10 bg-indigo-600/20 flex items-center justify-center border border-indigo-500/40">
+                      <svg className="animate-spin h-5 w-5 text-indigo-400" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <h4 className="text-xs font-bold font-mono tracking-widest text-indigo-300 uppercase animate-pulse">
+                    {isFileLoading ? "Menarik Berkas Desain..." : "Melakukan Refactoring JSON..."}
+                  </h4>
+                  <p className="text-[10px] text-slate-500 mt-1">Sistem sedang merestrukturisasi pohon objek vektor Lottie.</p>
+                </div>
+              )}
+
               <div className="border border-slate-800 rounded-xl overflow-hidden bg-slate-950">
                 <div className="flex border-b border-slate-800 bg-slate-900 text-xs">
                   <button 
@@ -688,8 +782,14 @@ export default function App() {
                         <button 
                           onClick={() => {
                             setFileName('carousel_design.json');
-                            setRawInput(JSON.stringify(defaultLottieJSON));
-                            doRefactor(JSON.stringify(defaultLottieJSON), indentSize);
+                            setRawInput(JSON.stringify(defaultCarouselJSON));
+                            doRefactor(JSON.stringify(defaultCarouselJSON), indentSize);
+                            triggerNotification(
+                              "Sistem Direfresh",
+                              "Konfigurasi editor telah dikembalikan ke template Lottie berputar bawaan.",
+                              "Gunakan Ctrl + Z jika Anda ingin mengembalikan perubahan sebelumnya.",
+                              "warning"
+                            );
                           }}
                           className="text-[10px] text-indigo-400 hover:underline font-semibold"
                         >
@@ -702,7 +802,7 @@ export default function App() {
                           setRawInput(e.target.value);
                           setFileName('pasted_carousel.json');
                         }}
-                        placeholder="Tempel baris teks JSON dari After Effects di sini..."
+                        placeholder="Tempel baris teks JSON dari Illustrator di sini..."
                         className="w-full h-24 bg-slate-900 border border-slate-800 rounded-lg p-3 text-xs font-mono text-slate-300 focus:outline-none"
                       />
                     </div>
@@ -713,20 +813,20 @@ export default function App() {
                       onDragOver={handleDragOver}
                       onDragLeave={handleDragLeave}
                       onDrop={handleDrop}
-                      className={`flex flex-col items-center justify-center border-2 border-dashed rounded-xl p-6 transition-all duration-300 ${
+                      className={`flex flex-col items-center justify-center border-2 border-dashed rounded-xl p-10 transition-all duration-300 ${
                         isDragging 
                           ? 'border-indigo-500 bg-indigo-500/10 scale-[1.01]' 
                           : 'border-slate-800 hover:border-indigo-500/40 bg-slate-900/40'
                       }`}
                     >
-                      <svg className={`h-6 w-6 mb-1.5 ${isDragging ? 'text-indigo-400' : 'text-slate-500'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className={`h-8 w-8 mb-2 ${isDragging ? 'text-indigo-400' : 'text-slate-500'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                       </svg>
-                      <label className="cursor-pointer text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-1.5 px-3 rounded-lg transition shadow-lg shadow-indigo-500/10">
+                      <label className="cursor-pointer text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2 px-4 rounded-lg transition shadow-lg shadow-indigo-500/10">
                         Pilih Berkas JSON
                         <input type="file" accept=".json" onChange={handleFileUpload} className="hidden" />
                       </label>
-                      <p className="text-xs text-slate-400 mt-2 text-center">
+                      <p className="text-xs text-slate-400 mt-3 text-center">
                         {fileName !== 'carousel_design.json' ? (
                           <span className="text-emerald-400 font-medium font-mono">Aktif: {fileName}</span>
                         ) : (
@@ -764,7 +864,7 @@ export default function App() {
               <div className="flex flex-col gap-1.5 flex-1">
                 <div className="flex justify-between items-center px-1">
                   <span className="text-xs text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
-                    ⚙️ PANEL LIVE EDITOR (REAL-TIME EDITABLE):
+                    ⚙ PANEL LIVE EDITOR (REAL-TIME EDITABLE):
                   </span>
                   <div className="flex items-center gap-2">
                     <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold border ${
@@ -809,11 +909,20 @@ export default function App() {
             </div>
 
             {/* Instant Preview Sisi Kanan (Berdampingan Langsung) */}
-            <div className="w-full xl:w-5/12 flex flex-col gap-3 justify-between bg-slate-950/50 p-5 border border-slate-850 rounded-2xl">
+            <div className="w-full xl:w-5/12 flex flex-col gap-3 justify-between bg-slate-950/50 p-5 border border-slate-850 rounded-2xl relative">
+              
+              {/* LOADING OVERLAY PREVIEW LOTTIE 1 (KETIKA SEDANG REFACTOR) */}
+              {(isRefactoring || isFileLoading) && (
+                <div className="absolute inset-0 bg-slate-950/70 backdrop-blur-[2px] z-30 flex flex-col items-center justify-center rounded-2xl shadow-2xl animate-fade-in">
+                  <div className="animate-spin rounded-full h-8 w-8 border-2 border-indigo-500 border-t-transparent mb-2"></div>
+                  <span className="text-[10px] text-indigo-300 font-mono uppercase tracking-wider animate-pulse">Menghubungkan Render...</span>
+                </div>
+              )}
+
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-1.5">
                   <span className="h-2 w-2 rounded-full bg-indigo-500 animate-pulse"></span>
-                  <span className="text-xs text-slate-400 font-bold uppercase tracking-wider">🖥️ INSTANT LOTTIE PREVIEW:</span>
+                  <span className="text-xs text-slate-400 font-bold uppercase tracking-wider">🖥 INSTANT LOTTIE PREVIEW:</span>
                 </div>
                 
                 {/* Selector Aspek Rasio Canvas Arqé */}
@@ -874,6 +983,7 @@ export default function App() {
               </div>
             </div>
 
+            {/* Tombol Simulasi Error untuk Pembuktian */}
             <button 
               onClick={corruptOutputForTesting}
               disabled={!refactoredOutput || !isValidJson}
@@ -883,7 +993,25 @@ export default function App() {
             </button>
           </div>
 
-          <div className="p-6 flex flex-col md:flex-row gap-6">
+          <div className="p-6 flex flex-col md:flex-row gap-6 relative">
+            
+            {/* LOADING OVERLAY INTEGRITAS KETIKA SEDANG MEMPROSES COMPARING */}
+            {isComparing && (
+              <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm z-30 flex flex-col items-center justify-center rounded-2xl shadow-2xl animate-fade-in">
+                <div className="relative flex items-center justify-center h-16 w-16 mb-4">
+                  <div className="animate-ping absolute inline-flex h-12 w-12 rounded-full bg-emerald-500/30 opacity-75"></div>
+                  <div className="relative rounded-full h-10 w-10 bg-emerald-600/20 flex items-center justify-center border border-emerald-500/40">
+                    <svg className="animate-spin h-5 w-5 text-emerald-400" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                  </div>
+                </div>
+                <h4 className="text-xs font-bold font-mono tracking-widest text-emerald-300 uppercase animate-pulse">Memproses Validasi Karakter...</h4>
+                <p className="text-[10px] text-slate-500 mt-1">Sistem sedang mereduksi data whitespace dan merumuskan enkripsi SHA-256 murni.</p>
+              </div>
+            )}
+
             <div className="w-full md:w-5/12 flex flex-col justify-center bg-slate-950/40 border border-slate-800 p-5 rounded-xl">
               <h4 className="text-sm font-semibold text-slate-300 mb-2">Metodologi Uji Integritas SHA-256:</h4>
               <ul className="text-xs text-slate-400 space-y-2 mb-5">
@@ -902,7 +1030,7 @@ export default function App() {
                 disabled={isComparing || !refactoredOutput || !isValidJson}
                 className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm py-3 px-6 rounded-xl flex items-center justify-center gap-2 transition"
               >
-                {isComparing ? 'Memproses Sidik Jari Digital...' : '🔒 Mulai Komparasi / Cek Kesamaan'}
+                🔒 Mulai Komparasi / Cek Kesamaan
               </button>
             </div>
 
@@ -941,7 +1069,7 @@ export default function App() {
         </section>
 
         {/* ==========================================
-            BAGIAN 3 (BAWAH): REAL LOTTIE PREVIEW STAGE (HEAD-TO-HEAD KOMPARASI DENGAN DRAG & DROP VIDEO)
+            BAGIAN 3 (BAWAH): COMPARATIVE PLAYBACK DECK (DENGAN DRAG & DROP VIDEO)
             ========================================== */}
         <section className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
           <div className="bg-slate-850/40 px-6 py-4 border-b border-slate-850 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -949,7 +1077,7 @@ export default function App() {
               <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-bold text-sm">3</span>
               <div>
                 <h3 className="font-semibold text-slate-200">Proses 3: Side-by-Side Comparative Playback Deck</h3>
-                <p className="text-xs text-slate-400">Sandingkan Lottie JSON dengan video referensi (.mp4) secara berdampingan. Mendukung drag & drop video!</p>
+                <p className="text-xs text-slate-400">Sandingkan Lottie JSON dengan video referensi (.mp4) secara berdampingan</p>
               </div>
             </div>
           </div>
@@ -966,8 +1094,16 @@ export default function App() {
                 Perbaiki kesalahan ketik JSON di Proses 1 (Atas) agar Lottie Player dapat memuat data.
               </div>
             ) : (
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch relative">
                 
+                {/* LOADING OVERLAY PREVIEW LOTTIE 2 & VIDEO COMPARING (KETIKA REFACTOR ATAU FILE SEDANG DIMUAT) */}
+                {(isRefactoring || isFileLoading) && (
+                  <div className="absolute inset-0 bg-slate-950/70 backdrop-blur-[2px] z-30 flex flex-col items-center justify-center rounded-2xl shadow-2xl animate-fade-in">
+                    <div className="animate-spin rounded-full h-8 w-8 border-2 border-indigo-500 border-t-transparent mb-2"></div>
+                    <span className="text-[10px] text-indigo-300 font-mono uppercase tracking-wider animate-pulse">Menghubungkan Player...</span>
+                  </div>
+                )}
+
                 {/* 3D Visual Stage (Kiri) - REAL LOTTIE RENDERER + MP4 COMPARISON */}
                 <div className="lg:col-span-8 flex flex-col gap-4 bg-slate-950/40 p-4 border border-slate-850/60 rounded-2xl">
                   
@@ -1041,7 +1177,7 @@ export default function App() {
                           </div>
                           <h5 className="text-xs font-semibold text-slate-300">Drag & Drop Video ke Sini!</h5>
                           <p className="text-[10px] text-slate-500 mt-1">
-                            Seret langsung berkas video 11 detik (<code>example.mp4</code>) milikmu dan letakkan di area kotak kanan ini.
+                            Seret langsung berkas video (example.mp4) milikmu dan letakkan di area kotak ini.
                           </p>
                         </div>
                       )}
@@ -1094,7 +1230,7 @@ export default function App() {
                     <div className="border-b border-slate-850 pb-2 flex justify-between items-center">
                       <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">📋 Detail Parameter JSON Lottie</h4>
                       <span className="text-[10px] text-emerald-400 font-mono bg-emerald-500/10 px-2 py-0.5 rounded-full font-bold">
-                        Murni Tanpa Adjustment
+                        Tanpa Adjustment
                       </span>
                     </div>
 
@@ -1122,7 +1258,7 @@ export default function App() {
                               <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2.5 bg-slate-900 border border-slate-800 rounded-lg shadow-2xl text-[10.5pt] text-slate-300 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-200 z-50 font-sans leading-normal">
                                 <div className="font-bold text-indigo-400 mb-0.5">{tooltip.title}</div>
                                 <p className="text-slate-400 text-xs leading-relaxed">{tooltip.description}</p>
-                                <div className="absolute top-full left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-900 border-b border-r border-slate-800 rotate-45 -mt-1"></div>
+                                <div className="absolute top-full left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-slate-900 border-b border-r border-slate-800 rotate-45 -mt-1.5"></div>
                               </div>
                             </div>
                           );
@@ -1163,7 +1299,7 @@ export default function App() {
                       Status Integrasi Lottie
                     </div>
                     <p className="text-[11px] leading-relaxed text-slate-400">
-                      Sistem membaca, merender, dan memutar data visual vektor Lottie murni dari berkas JSON secara native tanpa adjustment kodingan apa pun.
+                      Sistem membaca, merender, dan memutar data visual vektor Lottie murni dari berkas JSON secara native tanpa adjustment apa pun.
                     </p>
                   </div>
                 </div>
