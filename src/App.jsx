@@ -119,66 +119,75 @@ const defaultLottieJSON = {
   ]
 };
 
-// Penjelasan metadata Lottie untuk sistem hover tooltip
+// Penjelasan metadata Lottie untuk hover tooltip
 const lottieMetadataTooltips = {
   v: {
     letter: "V",
-    title: "Lottie Spec Version (v)",
-    description: "Versi spesifikasi Lottie dari After Effects Bodymovin yang digunakan untuk merender elemen vektor ini."
+    title: "Versi Lottie (v)",
+    description: "Versi spesifikasi parser JSON Lottie yang digunakan After Effects Bodymovin untuk mengekspor animasi vektor."
   },
   fr: {
     letter: "F",
     title: "Frame Rate (fr)",
-    description: "Kecepatan bingkai per detik (fps) asli yang didefinisikan oleh desainer di After Effects."
+    description: "Jumlah bingkai per detik (fps) murni yang didefinisikan desainer di After Effects."
   },
   w: {
     letter: "W",
     title: "Width (Lebar Kanvas)",
-    description: "Lebar bidang kanvas visual murni dalam satuan piksel (px)."
+    description: "Ukuran lebar kanvas visual murni di After Effects dalam satuan piksel."
   },
   h: {
     letter: "H",
     title: "Height (Tinggi Kanvas)",
-    description: "Tinggi bidang kanvas visual murni dalam satuan piksel (px)."
+    description: "Ukuran tinggi kanvas visual murni di After Effects dalam satuan piksel."
   },
   op: {
     letter: "T",
     title: "Total Frames (op)",
-    description: "Jumlah total bingkai/frame dari titik awal hingga titik akhir animasi."
+    description: "Jumlah total bingkai/frame dari titik awal hingga titik akhir animasi Lottie."
   }
 };
 
 export default function App() {
-  // --- STATE BAGIAN 1 (ATAS) ---
+  // --- STATE BAGIAN 1 (ATAS): INPUT & EDITING ---
   const [rawInput, setRawInput] = useState(JSON.stringify(defaultLottieJSON));
   const [refactoredOutput, setRefactoredOutput] = useState('');
   const [indentSize, setIndentSize] = useState(2);
   const [fileName, setFileName] = useState('carousel_design.json');
   const [inputTab, setInputTab] = useState('paste'); // 'paste', 'upload', 'drive'
   const [driveUrl, setDriveUrl] = useState('');
+  
+  // State untuk penyeretan berkas utama
   const [isDragging, setIsDragging] = useState(false);
   const [isRefactoring, setIsRefactoring] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
 
-  // --- STATE BAGIAN 2 (TENGAH) ---
+  // Validasi sintaksis JSON Real-time
+  const [isValidJson, setIsValidJson] = useState(true);
+  const [jsonError, setJsonError] = useState('');
+
+  // --- STATE BAGIAN 2 (TENGAH): KOMPARASI INTEGRITAS ---
   const [isComparing, setIsComparing] = useState(false);
   const [comparisonResult, setComparisonResult] = useState(null);
   const [originalHash, setOriginalHash] = useState('');
   const [refactoredHash, setRefactoredHash] = useState('');
 
-  // --- STATE BAGIAN 3 (BAWAH) ---
+  // --- STATE BAGIAN 3 (BAWAH): MULTI PREVIEWS (SAMPINGAN & HEAD-TO-HEAD) ---
   const [isPlaying, setIsPlaying] = useState(true);
   const [aspectRatio, setAspectRatio] = useState('16:9');
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   const [lottieLoaded, setLottieLoaded] = useState(false);
   
-  // State khusus file video referensi (untuk membandingkan dengan video referensi)
+  // State drag and drop Video Referensi (.mp4)
   const [videoFile, setVideoFile] = useState(null);
   const [videoUrl, setVideoUrl] = useState('');
+  const [isVideoDragging, setIsVideoDragging] = useState(false);
 
-  // Ref kontainer Lottie & instance
-  const lottieContainerRef = useRef(null);
-  const lottieInstanceRef = useRef(null);
+  // Refs untuk 2 Container Lottie (Preview Sampingan & Preview Komparasi)
+  const lottieContainerRef1 = useRef(null); // Di sebelah Editor
+  const lottieContainerRef2 = useRef(null); // Di sebelah Video head-to-head
+  const lottieInstance1Ref = useRef(null);
+  const lottieInstance2Ref = useRef(null);
   const videoPlayerRef = useRef(null);
 
   // Load awal format pretty-print saat aplikasi pertama kali dimuat
@@ -198,63 +207,78 @@ export default function App() {
     };
   }, []);
 
-  // Membangun ulang & merender Lottie secara murni dari berkas JSON aktif tanpa modifikasi
+  // Efek Pembangunan & Sinkronisasi DUA Preview Lottie sekaligus dari Editor Real-time
   useEffect(() => {
-    if (!lottieLoaded || !lottieContainerRef.current) return;
+    if (!lottieLoaded || !isValidJson) return;
 
-    // Hapus animasi lama terlebih dahulu agar tidak tumpang tindih
-    if (lottieInstanceRef.current) {
-      lottieInstanceRef.current.destroy();
-    }
+    // Hapus instansi lama terlebih dahulu agar tidak tumpang tindih
+    if (lottieInstance1Ref.current) lottieInstance1Ref.current.destroy();
+    if (lottieInstance2Ref.current) lottieInstance2Ref.current.destroy();
 
     try {
       const parsedLottie = JSON.parse(refactoredOutput);
       
-      // Deteksi validitas dasar struktur berkas Lottie (harus memiliki layers)
       if (parsedLottie.layers || parsedLottie.assets) {
-        lottieInstanceRef.current = window.lottie.loadAnimation({
-          container: lottieContainerRef.current,
-          renderer: 'svg',
-          loop: true,
-          autoplay: isPlaying,
-          animationData: parsedLottie
-        });
+        // Render Preview 1 (Sampingan Editor)
+        if (lottieContainerRef1.current) {
+          lottieInstance1Ref.current = window.lottie.loadAnimation({
+            container: lottieContainerRef1.current,
+            renderer: 'svg',
+            loop: true,
+            autoplay: isPlaying,
+            animationData: parsedLottie
+          });
+          lottieInstance1Ref.current.setSpeed(playbackSpeed);
+        }
 
-        // Setel kecepatan putaran murni mengikuti playback speed
-        lottieInstanceRef.current.setSpeed(playbackSpeed);
+        // Render Preview 2 (Komparasi Video)
+        if (lottieContainerRef2.current) {
+          lottieInstance2Ref.current = window.lottie.loadAnimation({
+            container: lottieContainerRef2.current,
+            renderer: 'svg',
+            loop: true,
+            autoplay: isPlaying,
+            animationData: parsedLottie
+          });
+          lottieInstance2Ref.current.setSpeed(playbackSpeed);
+        }
       }
     } catch (e) {
-      console.warn("Lottie render skipped: Editor masih dalam proses pengetikan/belum disubmit.");
+      console.warn("Lottie render skipped: Kode JSON tidak lengkap saat proses pengetikan.");
     }
 
     return () => {
-      if (lottieInstanceRef.current) {
-        lottieInstanceRef.current.destroy();
-      }
+      if (lottieInstance1Ref.current) lottieInstance1Ref.current.destroy();
+      if (lottieInstance2Ref.current) lottieInstance2Ref.current.destroy();
     };
-  }, [lottieLoaded, refactoredOutput, isPlaying, playbackSpeed]);
+  }, [lottieLoaded, refactoredOutput, isValidJson, isPlaying, playbackSpeed]);
 
-  // Efek sinkronisasi Play/Pause antara Video Referensi & Lottie
+  // Sinkronisasi tombol Play/Pause global
   useEffect(() => {
-    if (lottieInstanceRef.current) {
-      if (isPlaying) {
-        lottieInstanceRef.current.play();
-        if (videoPlayerRef.current) videoPlayerRef.current.play().catch(() => {});
-      } else {
-        lottieInstanceRef.current.pause();
-        if (videoPlayerRef.current) videoPlayerRef.current.pause();
-      }
+    const playAll = () => {
+      if (lottieInstance1Ref.current) lottieInstance1Ref.current.play();
+      if (lottieInstance2Ref.current) lottieInstance2Ref.current.play();
+      if (videoPlayerRef.current) videoPlayerRef.current.play().catch(() => {});
+    };
+
+    const pauseAll = () => {
+      if (lottieInstance1Ref.current) lottieInstance1Ref.current.pause();
+      if (lottieInstance2Ref.current) lottieInstance2Ref.current.pause();
+      if (videoPlayerRef.current) videoPlayerRef.current.pause();
+    };
+
+    if (isPlaying) {
+      playAll();
+    } else {
+      pauseAll();
     }
   }, [isPlaying]);
 
-  // Efek sinkronisasi kecepatan antara Video Referensi & Lottie
+  // Sinkronisasi tombol playbackSpeed global
   useEffect(() => {
-    if (lottieInstanceRef.current) {
-      lottieInstanceRef.current.setSpeed(playbackSpeed);
-    }
-    if (videoPlayerRef.current) {
-      videoPlayerRef.current.playbackRate = playbackSpeed;
-    }
+    if (lottieInstance1Ref.current) lottieInstance1Ref.current.setSpeed(playbackSpeed);
+    if (lottieInstance2Ref.current) lottieInstance2Ref.current.setSpeed(playbackSpeed);
+    if (videoPlayerRef.current) videoPlayerRef.current.playbackRate = playbackSpeed;
   }, [playbackSpeed]);
 
   // Fungsi Proses 1: Refactoring / Formatting
@@ -265,9 +289,13 @@ export default function App() {
         const parsed = JSON.parse(sourceText);
         const formatted = JSON.stringify(parsed, null, parseInt(indent));
         setRefactoredOutput(formatted);
-        setComparisonResult(null); // Reset hasil komparasi karena data telah berubah
+        setIsValidJson(true);
+        setJsonError('');
+        setComparisonResult(null); // Reset hasil komparasi karena data berubah
       } catch (err) {
-        setRefactoredOutput(`[ERROR] File JSON tidak valid!\nDetail: ${err.message}`);
+        setRefactoredOutput(sourceText); // Tetap tampilkan jika gagal parsing
+        setIsValidJson(false);
+        setJsonError(err.message);
       } finally {
         setIsRefactoring(false);
       }
@@ -276,6 +304,22 @@ export default function App() {
 
   const handleStartRefactor = () => {
     doRefactor(rawInput, indentSize);
+  };
+
+  // Handler pengetikan manual real-time langsung di editor hasil refactor
+  const handleJsonEditorChange = (e) => {
+    const value = e.target.value;
+    setRefactoredOutput(value);
+    
+    // Validasi sintaksis real-time untuk memperbarui preview Lottie tanpa merusak player
+    try {
+      JSON.parse(value);
+      setIsValidJson(true);
+      setJsonError('');
+    } catch (err) {
+      setIsValidJson(false);
+      setJsonError(err.message);
+    }
   };
 
   // Handler Upload berkas lokal dan drag drop
@@ -303,7 +347,7 @@ export default function App() {
 
   const processUploadedFile = (file) => {
     if (!file.name.endsWith('.json')) {
-      setRefactoredOutput("[ERROR] Berkas tidak didukung! Pastikan berkas berformat .json");
+      alert("Hanya berkas berekstensi .json yang didukung!");
       return;
     }
     setFileName(file.name);
@@ -315,8 +359,32 @@ export default function App() {
     reader.readAsText(file);
   };
 
-  // Handler upload video referensi murni (e.g. example.mp4)
-  const handleVideoUpload = (e) => {
+  // Drag and drop khusus Video Referensi (.mp4) ke panel Head-to-Head
+  const handleVideoDragOver = (e) => {
+    e.preventDefault();
+    setIsVideoDragging(true);
+  };
+
+  const handleVideoDragLeave = (e) => {
+    e.preventDefault();
+    setIsVideoDragging(false);
+  };
+
+  const handleVideoDrop = (e) => {
+    e.preventDefault();
+    setIsVideoDragging(false);
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('video/')) {
+      setVideoFile(file);
+      const url = URL.createObjectURL(file);
+      setVideoUrl(url);
+    } else {
+      alert("Harap unggah berkas video (.mp4) yang valid!");
+    }
+  };
+
+  // Upload Video Referensi secara manual via button
+  const handleVideoUploadButton = (e) => {
     const file = e.target.files[0];
     if (file) {
       setVideoFile(file);
@@ -338,7 +406,7 @@ export default function App() {
     } catch (e) {}
 
     if (!fileId) {
-      setRefactoredOutput("[ERROR] ID File Google Drive tidak terdeteksi!");
+      alert("ID File Google Drive tidak terdeteksi!");
       setIsRefactoring(false);
       return;
     }
@@ -358,7 +426,7 @@ export default function App() {
         throw new Error();
       }
     } catch (err) {
-      setRefactoredOutput("[ERROR] Gagal memuat otomatis dari Drive. Silakan gunakan metode 'Unggah Berkas'!");
+      alert("Gagal memuat otomatis dari Drive. Silakan gunakan metode 'Unggah Berkas'!");
     } finally {
       setIsRefactoring(false);
     }
@@ -481,15 +549,15 @@ export default function App() {
   const getAspectRatioStyles = () => {
     switch (aspectRatio) {
       case '16:9':
-        return { width: '100%', aspectRatio: '16/9', maxHeight: '310px' };
+        return { width: '100%', aspectRatio: '16/9', maxHeight: '280px' };
       case '9:16':
-        return { width: '190px', height: '330px' };
+        return { width: '170px', height: '300px' };
       case '1:1':
-        return { width: '270px', height: '270px' };
+        return { width: '240px', height: '270px' };
       case '4:5':
-        return { width: '250px', height: '310px' };
+        return { width: '220px', height: '280px' };
       default:
-        return { width: '100%', aspectRatio: '16/9', maxHeight: '310px' };
+        return { width: '100%', aspectRatio: '16/9', maxHeight: '280px' };
     }
   };
 
@@ -530,7 +598,7 @@ export default function App() {
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-indigo-500/30">
       
       {/* NAVBAR */}
-      <header className="border-b border-slate-900 bg-slate-950/80 backdrop-blur sticky top-0 z-30 px-6 py-4">
+      <nav className="border-b border-slate-900 bg-slate-950/80 backdrop-blur sticky top-0 z-40 px-6 py-4">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-3">
             <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-indigo-400 flex items-center justify-center shadow-lg shadow-indigo-500/20">
@@ -538,10 +606,10 @@ export default function App() {
             </div>
             <div>
               <h1 className="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
-                JSON Validator & Live Lottie Animator Studio
+                Arqé JSON Validator & Live Lottie Animator Studio
               </h1>
               <p className="text-xs text-slate-400">
-                {"Alur Kerja Tiga Proses Vertikal (Refactor -> Integrity Match -> Live Lottie Player)"}
+                Workspace Pengecekan Desain: Sanding Preview Instan & Video Referensi
               </p>
             </div>
           </div>
@@ -550,21 +618,21 @@ export default function App() {
             <span className="text-slate-300 font-mono">{fileName}</span>
           </div>
         </div>
-      </header>
+      </nav>
 
       {/* CORE WORKSPACE FLOW (Vertikal dari Atas ke Bawah) */}
       <main className="max-w-7xl w-full mx-auto px-4 md:px-6 py-8 space-y-10">
         
         {/* ==========================================
-            BAGIAN 1 (ATAS): REFACTORING & EDITING
+            BAGIAN 1 (ATAS): SINKRONISASI SAMPINGAN (EDITOR vs INSTANT PREVIEW)
             ========================================== */}
         <section className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
           <div className="bg-slate-850/40 px-6 py-4 border-b border-slate-850 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-2">
               <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-bold text-sm">1</span>
               <div>
-                <h3 className="font-semibold text-slate-200">Proses 1: Refactoring & Perbaikan Kode JSON</h3>
-                <p className="text-xs text-slate-400">Ubah format sebaris Adobe Illustrator menjadi terstruktur rapi</p>
+                <h3 className="font-semibold text-slate-200">Proses 1: Real-Time Live Editor & Instant Preview</h3>
+                <p className="text-xs text-slate-400">Sunting kode JSON secara interaktif, preview langsung ter-update di sebelah kanan</p>
               </div>
             </div>
 
@@ -586,27 +654,27 @@ export default function App() {
             </div>
           </div>
 
-          <div className="p-6 flex flex-col lg:flex-row gap-6">
+          <div className="p-6 flex flex-col xl:flex-row gap-6">
             
-            {/* Input Panel (Kiri) */}
-            <div className="w-full lg:w-5/12 flex flex-col gap-4">
+            {/* Editor Sisi Kiri (Bisa Diedit Manual) */}
+            <div className="w-full xl:w-7/12 flex flex-col gap-4">
               <div className="border border-slate-800 rounded-xl overflow-hidden bg-slate-950">
                 <div className="flex border-b border-slate-800 bg-slate-900 text-xs">
                   <button 
                     onClick={() => setInputTab('paste')}
-                    className={`flex-1 py-3 px-4 font-medium transition ${inputTab === 'paste' ? 'bg-slate-950 text-indigo-400 border-b-2 border-indigo-500' : 'text-slate-400 hover:text-slate-200'}`}
+                    className={`flex-1 py-3 px-4 font-medium transition-all ${inputTab === 'paste' ? 'bg-slate-950 text-indigo-400 border-b-2 border-indigo-500' : 'text-slate-400 hover:text-slate-200'}`}
                   >
                     📝 Paste JSON
                   </button>
                   <button 
                     onClick={() => setInputTab('upload')}
-                    className={`flex-1 py-3 px-4 font-medium transition ${inputTab === 'upload' ? 'bg-slate-950 text-indigo-400 border-b-2 border-indigo-500' : 'text-slate-400 hover:text-slate-200'}`}
+                    className={`flex-1 py-3 px-4 font-medium transition-all ${inputTab === 'upload' ? 'bg-slate-950 text-indigo-400 border-b-2 border-indigo-500' : 'text-slate-400 hover:text-slate-200'}`}
                   >
                     📤 Unggah Berkas
                   </button>
                   <button 
                     onClick={() => setInputTab('drive')}
-                    className={`flex-1 py-3 px-4 font-medium transition ${inputTab === 'drive' ? 'bg-slate-950 text-indigo-400 border-b-2 border-indigo-500' : 'text-slate-400 hover:text-slate-200'}`}
+                    className={`flex-1 py-3 px-4 font-medium transition-all ${inputTab === 'drive' ? 'bg-slate-950 text-indigo-400 border-b-2 border-indigo-500' : 'text-slate-400 hover:text-slate-200'}`}
                   >
                     💾 GDrive Link
                   </button>
@@ -616,7 +684,7 @@ export default function App() {
                   {inputTab === 'paste' && (
                     <div className="flex flex-col gap-2">
                       <div className="flex justify-between items-center">
-                        <label className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">JSON Mentah Illustrator/Lottie:</label>
+                        <label className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">JSON Mentah After Effects/Lottie:</label>
                         <button 
                           onClick={() => {
                             setFileName('carousel_design.json');
@@ -634,8 +702,8 @@ export default function App() {
                           setRawInput(e.target.value);
                           setFileName('pasted_carousel.json');
                         }}
-                        placeholder="Tempel baris teks JSON dari Illustrator di sini..."
-                        className="w-full h-44 bg-slate-900 border border-slate-800 rounded-lg p-3 text-xs font-mono text-slate-300 focus:outline-none"
+                        placeholder="Tempel baris teks JSON dari After Effects di sini..."
+                        className="w-full h-24 bg-slate-900 border border-slate-800 rounded-lg p-3 text-xs font-mono text-slate-300 focus:outline-none"
                       />
                     </div>
                   )}
@@ -645,20 +713,20 @@ export default function App() {
                       onDragOver={handleDragOver}
                       onDragLeave={handleDragLeave}
                       onDrop={handleDrop}
-                      className={`flex flex-col items-center justify-center border-2 border-dashed rounded-xl p-10 transition-all duration-300 ${
+                      className={`flex flex-col items-center justify-center border-2 border-dashed rounded-xl p-6 transition-all duration-300 ${
                         isDragging 
-                          ? 'border-indigo-500 bg-indigo-500/10 scale-[1.02]' 
+                          ? 'border-indigo-500 bg-indigo-500/10 scale-[1.01]' 
                           : 'border-slate-800 hover:border-indigo-500/40 bg-slate-900/40'
                       }`}
                     >
-                      <svg className={`h-8 w-8 mb-2 ${isDragging ? 'text-indigo-400' : 'text-slate-500'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className={`h-6 w-6 mb-1.5 ${isDragging ? 'text-indigo-400' : 'text-slate-500'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                       </svg>
-                      <label className="cursor-pointer text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2 px-4 rounded-lg transition shadow-lg shadow-indigo-500/10">
+                      <label className="cursor-pointer text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-1.5 px-3 rounded-lg transition shadow-lg shadow-indigo-500/10">
                         Pilih Berkas JSON
                         <input type="file" accept=".json" onChange={handleFileUpload} className="hidden" />
                       </label>
-                      <p className="text-xs text-slate-400 mt-3 text-center">
+                      <p className="text-xs text-slate-400 mt-2 text-center">
                         {fileName !== 'carousel_design.json' ? (
                           <span className="text-emerald-400 font-medium font-mono">Aktif: {fileName}</span>
                         ) : (
@@ -669,7 +737,7 @@ export default function App() {
                   )}
 
                   {inputTab === 'drive' && (
-                    <div className="flex flex-col gap-3 py-2">
+                    <div className="flex flex-col gap-2.5 py-1">
                       <label className="text-xs text-slate-400 font-bold uppercase tracking-wider">URL Google Drive:</label>
                       <div className="flex gap-2">
                         <input
@@ -687,60 +755,106 @@ export default function App() {
                           Tarik File
                         </button>
                       </div>
-                      <p className="text-[10px] text-slate-500 leading-relaxed">
-                        *Pastikan link Drive diatur ke 'Anyone with the link' agar server proxy AllOrigins bisa menarik data secara real-time.
-                      </p>
                     </div>
                   )}
                 </div>
               </div>
 
-              <button
-                onClick={handleStartRefactor}
-                disabled={isRefactoring || !rawInput}
-                className="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white font-bold text-sm py-3 px-6 rounded-xl flex items-center justify-center gap-2 shadow"
-              >
-                {isRefactoring ? 'Merapikan Kode...' : 'Mulai Refactor (Pretty-Print)'}
-              </button>
-            </div>
-
-            {/* Pretty Editor Panel (Kanan) */}
-            <div className="w-full lg:w-7/12 flex flex-col gap-2">
-              <div className="flex justify-between items-center px-1">
-                <span className="text-xs text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
-                  🖥/⚙ Hasil Refactoring Code:
-                </span>
-                <span className="text-[10px] bg-indigo-950/40 text-indigo-300 px-2 py-0.5 rounded-full font-semibold border border-indigo-500/20">
-                  ID Berkas: {fileName}
-                </span>
-              </div>
-
-              <div className="relative border border-slate-800 rounded-xl overflow-hidden bg-slate-950 flex flex-col h-[270px]">
-                <div className="flex justify-end gap-2 bg-slate-900 border-b border-slate-800 px-4 py-2 text-xs z-10">
-                  <button 
-                    onClick={handleCopyToClipboard}
-                    className="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition"
-                  >
-                    {copySuccess ? 'Copied! ✅' : '📋 Copy'}
-                  </button>
-                  <button 
-                    onClick={handleDownloadFile}
-                    className="px-3 py-1 rounded bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition"
-                  >
-                    📥 Download JSON
-                  </button>
+              {/* Pretty JSON Editor Panel */}
+              <div className="flex flex-col gap-1.5 flex-1">
+                <div className="flex justify-between items-center px-1">
+                  <span className="text-xs text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
+                    ⚙️ PANEL LIVE EDITOR (REAL-TIME EDITABLE):
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold border ${
+                      isValidJson 
+                        ? 'bg-emerald-950/40 text-emerald-400 border-emerald-500/20' 
+                        : 'bg-rose-950/40 text-rose-400 border-rose-500/20'
+                    }`}>
+                      {isValidJson ? '✔ SINTAKSIS VALID' : '✖ SINTAKSIS ERROR'}
+                    </span>
+                    <button 
+                      onClick={handleCopyToClipboard}
+                      className="text-[10px] px-2.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition"
+                    >
+                      {copySuccess ? 'Copied! ✅' : '📋 Copy'}
+                    </button>
+                    <button 
+                      onClick={handleDownloadFile}
+                      className="text-[10px] px-2.5 py-0.5 rounded bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition"
+                    >
+                      📥 Download
+                    </button>
+                  </div>
                 </div>
 
-                <textarea
-                  value={refactoredOutput}
-                  onChange={(e) => {
-                    setRefactoredOutput(e.target.value);
-                    setComparisonResult(null);
-                  }}
-                  className="w-full flex-1 bg-slate-950 p-4 font-mono text-xs text-emerald-400 focus:outline-none resize-none leading-relaxed overflow-y-auto animate-none"
-                  style={{ tabSize: indentSize }}
-                  spellCheck="false"
-                />
+                <div className="relative border border-slate-800 rounded-xl overflow-hidden bg-slate-950 flex flex-col h-[340px]">
+                  <textarea
+                    value={refactoredOutput}
+                    onChange={handleJsonEditorChange}
+                    className={`w-full flex-1 bg-slate-950 p-4 font-mono text-xs focus:outline-none resize-none leading-relaxed overflow-y-auto ${
+                      isValidJson ? 'text-emerald-400' : 'text-rose-400 bg-rose-950/5'
+                    }`}
+                    style={{ tabSize: indentSize }}
+                    spellCheck="false"
+                  />
+                  {!isValidJson && (
+                    <div className="absolute bottom-0 inset-x-0 bg-rose-950 border-t border-rose-500/20 px-4 py-2 text-[11px] text-rose-300 font-mono truncate">
+                      Detail Error: {jsonError}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Instant Preview Sisi Kanan (Berdampingan Langsung) */}
+            <div className="w-full xl:w-5/12 flex flex-col gap-3 justify-between bg-slate-950/50 p-5 border border-slate-850 rounded-2xl">
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-indigo-500 animate-pulse"></span>
+                  <span className="text-xs text-slate-400 font-bold uppercase tracking-wider">🖥️ INSTANT LOTTIE PREVIEW:</span>
+                </div>
+                
+                {/* Selector Aspek Rasio Canvas Arqé */}
+                <div className="flex items-center gap-1 bg-slate-900 p-0.5 rounded-lg border border-slate-800 text-[10px]">
+                  {['16:9', '9:16', '1:1', '4:5'].map((ratio) => (
+                    <button
+                      key={ratio}
+                      onClick={() => setAspectRatio(ratio)}
+                      className={`px-2.5 py-1 rounded font-medium transition ${
+                        aspectRatio === ratio ? 'bg-slate-800 text-indigo-300 shadow' : 'text-slate-500 hover:text-slate-300'
+                      }`}
+                    >
+                      {ratio}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Kontainer Box Preview Instan */}
+              <div className="flex-1 flex items-center justify-center border border-slate-800/40 rounded-xl bg-slate-950 p-4 relative min-h-[300px]">
+                {!lottieLoaded ? (
+                  <div className="animate-pulse text-xs text-slate-500">Memuat Player Lottie...</div>
+                ) : !isValidJson ? (
+                  <div className="text-center p-4">
+                    <div className="text-lg mb-1">⚠️</div>
+                    <span className="text-xs text-rose-400 font-medium">Render Ditunda</span>
+                    <p className="text-[10px] text-slate-500 mt-1 max-w-[200px]">Perbaiki kesalahan sintaksis di editor kiri untuk mengaktifkan kembali preview murni.</p>
+                  </div>
+                ) : (
+                  <div 
+                    className="flex items-center justify-center overflow-hidden transition-all duration-300 relative rounded-xl"
+                    style={getAspectRatioStyles()}
+                  >
+                    {/* DOM Target Lottie 1 */}
+                    <div ref={lottieContainerRef1} className="w-full h-full object-contain" />
+                  </div>
+                )}
+              </div>
+
+              <div className="bg-slate-900/60 p-3 rounded-lg border border-slate-850 text-[10.5px] text-slate-400 leading-normal">
+                💡 <strong>Keterangan Workstation:</strong> Ketika desainer mengedit manual teks atau angka koordinat Lottie di sebelah kiri, preview di atas akan seketika melakukan render ulang secara instan.
               </div>
             </div>
 
@@ -748,7 +862,7 @@ export default function App() {
         </section>
 
         {/* ==========================================
-            BAGIAN 2 (TENGAH): INTEGRITY COMPARISON
+            BAGIAN 2 (TENGAH): PENGECEKAN INTEGRITAS SHA-256
             ========================================== */}
         <section className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
           <div className="bg-slate-850/40 px-6 py-4 border-b border-slate-850 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -756,13 +870,13 @@ export default function App() {
               <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold text-sm">2</span>
               <div>
                 <h3 className="font-semibold text-slate-200">Proses 2: Pengecekan Integritas & Struktur Data</h3>
-                <p className="text-xs text-slate-400">Pastikan proses di atas tidak menghilangkan satu huruf atau kata kunci pun</p>
+                <p className="text-xs text-slate-400">Pastikan proses pengeditan di atas tidak merusak keaslian byte-by-byte After Effects</p>
               </div>
             </div>
 
             <button 
               onClick={corruptOutputForTesting}
-              disabled={!refactoredOutput || refactoredOutput.startsWith('[ERROR]')}
+              disabled={!refactoredOutput || !isValidJson}
               className="text-xs bg-rose-500/10 border border-rose-500/20 text-rose-400 hover:bg-rose-500/20 px-3 py-1.5 rounded-lg font-medium transition"
             >
               ⚠️ Sengaja Buat Error (Uji Alat)
@@ -775,17 +889,17 @@ export default function App() {
               <ul className="text-xs text-slate-400 space-y-2 mb-5">
                 <li className="flex items-start gap-2">
                   <span className="text-emerald-500 mt-0.5">✔</span>
-                  Mengeleminasi spasi murni dan baris baru (whitespace).
+                  Mengeleminasi spasi murni dan baris baru (whitespace) secara ketat.
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-emerald-500 mt-0.5">✔</span>
-                  Membandingkan byte-by-byte menggunakan Signature Hashing.
+                  Membandingkan byte-by-byte menggunakan Signature Hashing digital.
                 </li>
               </ul>
 
               <button
                 onClick={handleCompareIntegritas}
-                disabled={isComparing || !refactoredOutput || refactoredOutput.startsWith('[ERROR]')}
+                disabled={isComparing || !refactoredOutput || !isValidJson}
                 className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm py-3 px-6 rounded-xl flex items-center justify-center gap-2 transition"
               >
                 {isComparing ? 'Memproses Sidik Jari Digital...' : '🔒 Mulai Komparasi / Cek Kesamaan'}
@@ -827,33 +941,16 @@ export default function App() {
         </section>
 
         {/* ==========================================
-            BAGIAN 3 (BAWAH): REAL LOTTIE PREVIEW STAGE (SINKRON 100% DENGAN HASIL AE/ILLUSTRATOR)
+            BAGIAN 3 (BAWAH): REAL LOTTIE PREVIEW STAGE (HEAD-TO-HEAD KOMPARASI DENGAN DRAG & DROP VIDEO)
             ========================================== */}
         <section className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
           <div className="bg-slate-850/40 px-6 py-4 border-b border-slate-850 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-2">
               <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-bold text-sm">3</span>
               <div>
-                <h3 className="font-semibold text-slate-200">Proses 3: Visual Carousel Simulator & Live Audit</h3>
-                <p className="text-xs text-slate-400">Memutar berkas Lottie JSON murni secara sinkron dengan video referensi (.mp4) untuk audit visual mutlak</p>
+                <h3 className="font-semibold text-slate-200">Proses 3: Side-by-Side Comparative Playback Deck</h3>
+                <p className="text-xs text-slate-400">Sandingkan Lottie JSON dengan video referensi (.mp4) secara berdampingan. Mendukung drag & drop video!</p>
               </div>
-            </div>
-
-            {/* Aspek Rasio Simulator */}
-            <div className="flex items-center gap-1 bg-slate-950 p-0.5 rounded-lg border border-slate-800 text-[11px]">
-              {['16:9', '9:16', '1:1', '4:5'].map((ratio) => (
-                <button
-                  key={ratio}
-                  onClick={() => setAspectRatio(ratio)}
-                  className={`px-3 py-1 rounded font-medium transition ${
-                    aspectRatio === ratio
-                      ? 'bg-slate-800 text-indigo-300 shadow'
-                      : 'text-slate-400 hover:text-slate-200'
-                  }`}
-                >
-                  {ratio}
-                </button>
-              ))}
             </div>
           </div>
 
@@ -878,14 +975,14 @@ export default function App() {
                   <div className="flex justify-between items-center px-2 py-1 bg-slate-900/50 rounded-lg border border-slate-800/40 text-xs">
                     <div className="flex items-center gap-2">
                       <span className="h-2 w-2 rounded-full bg-indigo-500 animate-pulse"></span>
-                      <span className="text-slate-300 font-medium">Visual Real-time Stage</span>
+                      <span className="text-slate-300 font-medium">Visual Real-time Stage (Head-to-Head)</span>
                     </div>
 
-                    {/* File Video Input */}
+                    {/* File Video Input (Fallback) */}
                     <div className="flex items-center gap-2">
                       <label className="cursor-pointer text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded border border-slate-700 transition">
-                        {videoFile ? `Ganti Video: ${videoFile.name.substring(0,10)}...` : '📂 Unggah Video Referensi (.mp4)'}
-                        <input type="file" accept="video/mp4" onChange={handleVideoUpload} className="hidden" />
+                        {videoFile ? `Ganti Video: ${videoFile.name.substring(0,12)}...` : '📂 Pilih Video Referensi (.mp4)'}
+                        <input type="file" accept="video/mp4" onChange={handleVideoUploadButton} className="hidden" />
                       </label>
                     </div>
                   </div>
@@ -904,19 +1001,28 @@ export default function App() {
                         style={getAspectRatioStyles()}
                       >
                         {/* Target DOM Element tempat Lottie-Web menggambar SVG */}
-                        <div ref={lottieContainerRef} className="w-full h-full object-contain" />
+                        <div ref={lottieContainerRef2} className="w-full h-full object-contain" />
                       </div>
                     </div>
 
-                    {/* BOX KANAN: Reference Video Player (.mp4) */}
-                    <div className="flex flex-col items-center justify-center border border-slate-800/55 rounded-xl bg-slate-950 p-4 relative min-h-[300px]">
+                    {/* BOX KANAN: Reference Video Player (.mp4) dengan DRAG & DROP langsung */}
+                    <div 
+                      onDragOver={handleVideoDragOver}
+                      onDragLeave={handleVideoDragLeave}
+                      onDrop={handleVideoDrop}
+                      className={`flex flex-col items-center justify-center border-2 rounded-xl p-4 relative min-h-[300px] transition-all duration-300 ${
+                        isVideoDragging 
+                          ? 'border-indigo-500 bg-indigo-500/10 scale-[1.01]' 
+                          : 'border-slate-800/55 bg-slate-950 hover:border-slate-700'
+                      }`}
+                    >
                       <span className="absolute top-2 left-3 text-[9px] font-bold text-slate-500 tracking-wider uppercase bg-slate-900/80 px-2 py-0.5 rounded border border-slate-800">
                         📹 Video Referensi (.mp4)
                       </span>
 
                       {videoUrl ? (
                         <div 
-                          className="flex items-center justify-center overflow-hidden transition-all duration-300 relative rounded-xl"
+                          className="flex items-center justify-center overflow-hidden transition-all duration-300 relative rounded-xl w-full h-full"
                           style={getAspectRatioStyles()}
                         >
                           <video 
@@ -929,13 +1035,13 @@ export default function App() {
                           />
                         </div>
                       ) : (
-                        <div className="text-center p-6 max-w-xs">
+                        <div className="text-center p-6 max-w-xs cursor-pointer">
                           <div className="h-10 w-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center mx-auto mb-2">
                             <span className="text-lg">🎞️</span>
                           </div>
-                          <h5 className="text-xs font-semibold text-slate-300">Belum Ada Video Referensi</h5>
+                          <h5 className="text-xs font-semibold text-slate-300">Drag & Drop Video ke Sini!</h5>
                           <p className="text-[10px] text-slate-500 mt-1">
-                            Unggah berkas video 11 detik (<code>example.mp4</code>) milikmu di atas untuk menyandingkan dengan Lottie.
+                            Seret langsung berkas video 11 detik (<code>example.mp4</code>) milikmu dan letakkan di area kotak kanan ini.
                           </p>
                         </div>
                       )}
@@ -954,7 +1060,7 @@ export default function App() {
                             : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20'
                         }`}
                       >
-                        <span>{isPlaying ? '⏸ Jeda Animasi' : '▶ Putar Animasi'}</span>
+                        <span>{isPlaying ? '⏸ Jeda Sinkronisasi' : '▶ Putar Sinkronisasi'}</span>
                       </button>
 
                       {/* Speed Multiplier */}
@@ -1071,7 +1177,7 @@ export default function App() {
 
       {/* FOOTER */}
       <footer className="border-t border-slate-900 bg-slate-950 py-6 text-center text-xs text-slate-500">
-        <p>© 2026 Clone Project — Automated JSON Verification Toolkit</p>
+        <p>© 2026 Arqé Clone Project — Automated JSON Verification Toolkit</p>
       </footer>
 
     </div>
